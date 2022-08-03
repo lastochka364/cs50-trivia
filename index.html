@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the capital of Ukraine?</h3>
+                <label id="incorrectBtn">Incorrect</label>
+                <label id="correctBtn">Correct!</label>
+                <!-- TODO: Add multiple choice question here -->
+                <button>Vienna</button>
+                <button>Berlin</button>
+					 <button name="correctChoise">Kiev</button>
+                <button>Riga</button>
+                <button>Luxembourg</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>What is the number of rainbow collors?</h3>
+                <form>
+                    <input id="questionFreeResponse" autocomplete="off" placeholder="Write an integer here" type="text">
+                    <input id="buttonFreeResponse" type="submit" value="Check Answer">
+                    <label id="incorrectInput">Incorrect</label>
+                    <label id="correctInput">Correct!</label>
+                </form>
+            </div>
+        </div>
+        <script>
+            // TODO: Add code to check answers to questions
+            let incorrect_btn = document.querySelector("#incorrectBtn");
+            let correct_btn = document.querySelector("#correctBtn");
+            let buttons = document.querySelectorAll('.section button');
+            let form = document.querySelector('form');
+            let input = document.querySelector('#questionFreeResponse');
+            let incorrect_input = document.querySelector("#incorrectInput");
+            let correct_input = document.querySelector("#correctInput");
+
+            incorrect_btn.style.display = 'none';
+            correct_btn.style.display = 'none';
+            incorrect_input.style.display = 'none';
+            correct_input.style.display = 'none';
+
+            for (const btn of buttons) {
+	            btn.addEventListener('click', function(e) {
+                    if(btn.name == "correctChoise") {
+                        action(btn, correct_btn, incorrect_btn);
+                        btn.style.backgroundColor = 'lightgreen';
+                    } else {
+                        action(btn, incorrect_btn, correct_btn);
+                        btn.style.backgroundColor = '#AB3653';
+                    }
+                    e.preventDefault();
+                });
+            }
+
+            function action(btn, toBlock, toNone) {
+                buttons.forEach( b => {
+                    b.style.backgroundColor = '#d9edff';
+                });
+                toBlock.style.display = 'block';
+                toNone.style.display = 'none';
+            }
+
+            form.addEventListener('submit', function(e) {
+                if(input.value == 7) {
+                    input.style.backgroundColor = 'lightgreen';
+                    incorrect_input.style.display = 'none';
+                    correct_input.style.display = 'block';
+                } else {
+                    input.style.backgroundColor = '#AB3653';
+						  incorrect_input.style.display = 'block';
+                    correct_input.style.display = 'none';
+                }
+                e.preventDefault();
+            });
+        </script>
+    </body>
+</html>
